@@ -620,35 +620,79 @@
 
     <!-- NOVO MÓDULO 7: MODELAGEM AVANÇADA DE SOCS: MODELO GAMUT E A CONEXÃO CRUZADA EM BIBLIOTECAS DIGITAIS -->
     <section id="gamut-interoperabilidade" class="space-y-6 scroll-mt-20">
-      <div class="border-b-2 border-[#1B6B65] pb-3 flex items-center justify-between">
+      <div class="border-b-2 border-[#1B6B65] pb-3 flex items-center justify-between gap-3">
         <div>
           <span class="text-xs font-bold uppercase tracking-wider text-[#1B6B65]">Módulo 7 • Modelagem e Integração</span>
           <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-[#0C1B2A]">O Modelo Gamut de SOCs e a Interoperabilidade em Bibliotecas Digitais</h2>
         </div>
-        <i class="ph ph-chart-scatter text-3xl text-[#1B6B65]"></i>
+        <i class="ph ph-chart-scatter text-3xl text-[#1B6B65]" aria-hidden="true"></i>
       </div>
-
-      <div class="grid lg:grid-cols-2 gap-8">
-        <!-- O Modelo Gamut (Khazraee & Lin, 2011 / Moreira, 2018) -->
-        <div class="bg-white p-6 sm:p-8 rounded-xl border border-gray-200 shadow-sm space-y-4">
-          <div class="border-b pb-2 flex items-center justify-between">
-            <h3 class="font-cinzel font-bold text-base text-[#0C1B2A]">
-              Além do Espectro Linear: O Modelo Gamut (Khazraee; Lin, 2011 apud Moreira, 2018)
-            </h3>
-            <span class="badge bg-purple-100 text-purple-800">Formalização × Semântica</span>
-          </div>
-          <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
-            Como evidencia Walter Moreira (2018), a representação dos SOCs como uma linha unidirecional simples é insuficiente. Khazraee e Lin (2011 apud Moreira, 2018) propõem um <em>gamut</em> bidimensional que cruza dois eixos cruciais:
-          </p>
-          <div class="p-4 bg-gray-50 rounded-lg border border-gray-200 text-xs space-y-2">
-            <p><strong>Eixo Vertical — Grau de Formalização Lógica:</strong> Mede o quanto o SOC está expresso em linguagens processáveis por máquina capazes de realizar inferências automáticas e raciocínio formal (ex.: ontologias OWL, RDF).</p>
-            <p><strong>Eixo Horizontal — Nível de Conteúdo Semântico:</strong> Avalia a densidade de significados, riqueza das relações contextuais e nuances interpretativas humanas (onde tesauros e sistemas de classificação bibliográfica concentram grande solidez).</p>
-          </div>
-          <p class="text-xs text-gray-500 italic">
-            O objetivo das bibliotecas digitais não é substituir um pelo outro, mas promover a coexistência harmônica dos dois eixos para alimentar tanto humanos quanto agentes computacionais.
-          </p>
+      <div class="bg-white p-5 sm:p-8 rounded-xl border border-gray-200 shadow-sm space-y-5">
+        <div class="flex flex-wrap items-center gap-2 justify-between">
+          <h3 class="font-cinzel font-bold text-base sm:text-lg text-[#0C1B2A]">Por que os SOCs não cabem em uma única escala?</h3>
+          <span class="badge bg-purple-100 text-purple-800">Formalização × conteúdo semântico</span>
         </div>
-
+        <p class="text-sm text-gray-700 leading-relaxed">Uma lista de termos, um tesauro e uma ontologia <strong>não se diferenciam apenas por serem mais ou menos complexos</strong>. Um SOC pode oferecer relações conceituais detalhadas e, ao mesmo tempo, ter pouca formalização lógica; outro pode apresentar regras legíveis por máquina, mas representar um domínio de modo limitado. O <em>modelo gamut</em> propõe observar <strong>duas dimensões simultaneamente</strong>, em vez de posicionar todos os instrumentos em uma única linha (Khazraee; Lin, 2011 <em>apud</em> Moreira, 2018).</p>
+        <div class="grid md:grid-cols-2 gap-3 text-sm">
+          <div class="p-4 rounded-lg bg-blue-50 border-l-4 border-blue-700">
+            <strong class="block text-blue-900 mb-1">Eixo vertical ↑ Formalização lógica</strong>
+            <p class="text-gray-700">Indica até que ponto conceitos e relações foram descritos por regras explícitas que um programa consegue interpretar e, em determinadas condições, usar para produzir inferências. <strong>Não equivale simplesmente a estar em formato digital.</strong></p>
+          </div>
+          <div class="p-4 rounded-lg bg-amber-50 border-l-4 border-[#C59B27]">
+            <strong class="block text-amber-900 mb-1">Eixo horizontal → Conteúdo semântico</strong>
+            <p class="text-gray-700">Indica quanto significado e quantas distinções ou relações conceituais são expressos no sistema. <strong>Mais termos, isoladamente, não garantem maior riqueza semântica.</strong></p>
+          </div>
+        </div>
+        <figure class="rounded-xl border border-gray-200 bg-[#F9F8F5] p-3 sm:p-5 space-y-2" aria-labelledby="gamut-figure-title">
+          <figcaption id="gamut-figure-title" class="font-semibold text-center text-sm sm:text-base text-[#0C1B2A]">Gráfico didático: duas dimensões para comparar SOCs</figcaption>
+          <div class="w-full overflow-hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 480" role="img" aria-labelledby="gamut-svg-title gamut-svg-desc" style="width:100%;height:auto;display:block;max-width:760px;margin:auto">
+            <title id="gamut-svg-title">Modelo bidimensional de formalização lógica e conteúdo semântico</title>
+            <desc id="gamut-svg-desc">Eixo horizontal aumenta da esquerda para a direita, indicando mais conteúdo semântico. Eixo vertical aumenta de baixo para cima, indicando mais formalização lógica. As posições dos tipos de SOC são exemplos ilustrativos, não medições.</desc>
+            <rect x="110" y="45" width="590" height="340" rx="13" fill="#ffffff" stroke="#cbd5e1"/>
+            <rect x="111" y="46" width="294" height="169" fill="#eef2ff" opacity=".65"/>
+            <rect x="405" y="46" width="294" height="169" fill="#e0f2f1" opacity=".7"/>
+            <rect x="111" y="215" width="294" height="169" fill="#f1f5f9" opacity=".9"/>
+            <rect x="405" y="215" width="294" height="169" fill="#fff6df" opacity=".85"/>
+            <path d="M405 46 V385 M110 215 H700" stroke="#cbd5e1" stroke-dasharray="6 6" stroke-width="2"/>
+            <path d="M110 385 H714 M110 385 V31" stroke="#0C1B2A" stroke-width="3" fill="none"/>
+            <path d="M714 385 l-13 -7 v14z M110 31 l-7 13 h14z" fill="#0C1B2A"/>
+            <g font-family="Arial, sans-serif" font-size="16" fill="#334155">
+              <text x="110" y="411">Baixo</text><text x="668" y="411">Alto</text>
+              <text x="405" y="448" text-anchor="middle" font-weight="700" fill="#0C1B2A">Conteúdo semântico →</text>
+              <text transform="translate(25 215) rotate(-90)" text-anchor="middle" font-weight="700" fill="#0C1B2A">Formalização lógica →</text>
+              <text x="120" y="30" font-size="14">Alto</text><text x="120" y="379" font-size="14">Baixo</text>
+            </g>
+            <g font-family="Arial, sans-serif" font-size="15" text-anchor="middle" font-weight="600">
+              <rect x="155" y="298" width="200" height="48" rx="12" fill="#e2e8f0" stroke="#94a3b8"/>
+              <text x="255" y="318" fill="#1e293b">Listas de termos</text><text x="255" y="336" fill="#475569" font-size="12">relações pouco explícitas</text>
+              <rect x="444" y="284" width="205" height="56" rx="12" fill="#fef3c7" stroke="#d97706"/>
+              <text x="546" y="307" fill="#78350f">Tesauros e classificações</text><text x="546" y="325" fill="#92400e" font-size="12">relações conceituais estruturadas</text>
+              <rect x="449" y="85" width="210" height="58" rx="12" fill="#ccfbf1" stroke="#0f766e" stroke-width="1.7"/>
+              <text x="554" y="106" fill="#134e4a">Ontologias formalizadas</text><text x="554" y="124" fill="#115e59" font-size="12">regras explícitas e inferências</text>
+            </g>
+            <g font-family="Arial, sans-serif" font-size="12" fill="#64748b"><text x="133" y="65">Formalização alta</text><text x="486" y="65">Ambas elevadas</text><text x="132" y="236">Ambas baixas</text><text x="468" y="236">Semântica elevada</text></g>
+          </svg>
+          </div>
+          <p class="text-xs text-gray-600 leading-relaxed"><strong>Como ler:</strong> da esquerda para a direita aumenta a explicitação de significados e relações; de baixo para cima aumenta a formalização lógica. <strong>Posições meramente ilustrativas, sem pontuação ou hierarquia de qualidade.</strong> Um tesauro publicado em SKOS, por exemplo, pode ter sua representação computacional ampliada sem necessariamente adquirir todas as características inferenciais de uma ontologia OWL.</p>
+          <p class="text-[11px] text-gray-500">Esquema didático original elaborado a partir da discussão do <em>ontology gamut model</em> de Khazraee e Lin (2011 <em>apud</em> Moreira, 2018), sem reproduzir a figura original.</p>
+        </figure>
+        <details class="group border border-teal-200 rounded-xl bg-teal-50/50 p-4">
+          <summary class="cursor-pointer font-bold text-sm text-teal-900 flex items-center justify-between gap-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-teal-800"><span><i class="ph ph-lightbulb" aria-hidden="true"></i> Exemplo aplicado: uma biblioteca digital de recursos educacionais</span><i class="ph ph-caret-down group-open:rotate-180 transition-transform" aria-hidden="true"></i></summary>
+          <div class="pt-3 space-y-2 text-sm leading-relaxed text-gray-700">
+            <p>Imagine uma coleção de vídeos, podcasts e infográficos sobre saúde. Uma <strong>lista de termos</strong> padroniza nomes; um <strong>tesauro</strong> explicita relações como termos mais amplos, específicos e associados; uma <strong>ontologia formalizada</strong> pode definir relações e regras que permitam inferências adicionais, desde que essas regras tenham sido modeladas.</p>
+            <p><strong>Pergunta para reflexão:</strong> converter um tesauro em formato digital equivale a transformá-lo em ontologia? <strong>Não.</strong> Digitalização, riqueza semântica e formalização lógica não são equivalentes.</p>
+          </div>
+        </details>
+        <p class="text-sm text-gray-700 leading-relaxed"><strong>Ideia-chave:</strong> o <em>gamut</em> ajuda a escolher ou combinar SOCs de acordo com as necessidades de representação, busca e processamento computacional. Não há um tipo universalmente superior: a adequação depende do domínio, dos usuários e das tarefas.</p>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-8">
+        <div class="bg-white p-6 sm:p-8 rounded-xl border border-gray-200 shadow-sm space-y-3">
+          <h3 class="font-cinzel font-bold text-base text-[#0C1B2A]">Do modelo à interoperabilidade</h3>
+          <p class="text-sm text-gray-700 leading-relaxed">O gráfico mostra <strong>como descrever diferenças</strong> entre SOCs; a interoperabilidade responde a outra pergunta: <strong>como fazer sistemas distintos compartilharem ou relacionarem seus conceitos?</strong> Para isso, são necessários identificadores, relações de correspondência, formatos interoperáveis e mapeamentos cuidadosamente mantidos.</p>
+          <div class="p-3 bg-gray-50 rounded-lg text-sm text-gray-700 border-l-4 border-[#1B6B65]"><strong>Exemplo:</strong> um repositório usa “Educação a Distância” e outro utiliza “Ensino on-line”. Um mapeamento pode registrar a relação entre esses conceitos, após avaliar se os significados são equivalentes ou apenas próximos.</div>
+          <p class="text-xs text-gray-500">A correspondência semântica não é automática nem implica equivalência perfeita (Hodge, 2000; Rio-Branco; Moreira; Fujita, 2021).</p>
+        </div>
         <!-- A Conexão Cruzada e o Papel dos SOCs em Bibliotecas Digitais (Gail Hodge, 2000) -->
         <div class="bg-white p-6 sm:p-8 rounded-xl border border-gray-200 shadow-sm space-y-4">
           <div class="border-b pb-2 flex items-center justify-between">
@@ -675,6 +719,7 @@
             </div>
           </div>
         </div>
+
       </div>
     </section>
 
@@ -1574,10 +1619,5 @@
       renderQuiz();
     });
   </script>
-  <script>
-  document.addEventListener('contextmenu', function (event) {
-    event.preventDefault();
-});
-</script>
 </body>
 </html>
