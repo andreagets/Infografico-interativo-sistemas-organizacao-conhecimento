@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistemas de Organização do Conhecimento: Organização, Classificação e Recuperação</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts & Phosphor Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              navy: '#0C1B2A',
+              darkblue: '#13283E',
+              gold: '#C59B27',
+              goldlight: '#F4D368',
+              teal: '#1B6B65',
+              crimson: '#8F2232',
+              cream: '#F9F8F5',
+              surface: '#FFFFFF',
+              border: '#E2E8F0',
+              muted: '#64748B'
+            }
+          },
+          fontFamily: {
+            display: ['Cinzel', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"Fira Code"', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #F9F8F5;
+      color: #0C1B2A;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .font-cinzel {
+      font-family: 'Cinzel', serif;
+    }
+    /* Barra de Leitura Superior */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #C59B27, #F4D368);
+      width: 0%;
+      z-index: 100;
+      transition: width 0.1s ease-out;
+    }
+    details > summary {
+      list-style: none;
+    }
+    details > summary::-webkit-details-marker {
+      display: none;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 10px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .soc-link {
+      color: #1B6B65;
+      font-weight: 600;
+      text-decoration: underline;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: color 0.2s;
+    }
+    .soc-link:hover {
+      color: #C59B27;
+    }
+  </style>
+</head>
+<body class="selection:bg-amber-200 selection:text-amber-900">
+
+  <!-- Barra de progresso -->
+  <div id="progress-bar"></div>
+
+  <!-- MENU DE NAVEGAÇÃO RESPONSIVO E RETRÁTIL -->
+  <nav class="sticky top-0 z-40 bg-[#0C1B2A] text-white border-b border-gray-800 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Logo / Título Curto -->
+        <a href="#inicio" class="flex items-center gap-2 group">
+          <div class="w-8 h-8 rounded-lg bg-[#C59B27] flex items-center justify-center text-[#0C1B2A] font-extrabold text-sm shadow">
+            SOC
+          </div>
+          <div class="hidden sm:block">
+            <span class="font-cinzel font-bold text-sm tracking-wide group-hover:text-[#F4D368] transition">PPGCI • SOC & RI</span>
+          </div>
+        </a>
+
+        <!-- Menu Desktop Rápido -->
+        <div class="hidden xl:flex items-center space-x-1 text-xs uppercase tracking-wider font-semibold">
+          <a href="#epistemologia" class="px-2.5 py-2 rounded-md hover:bg-gray-800 hover:text-[#F4D368] transition">Epistemologia</a>
+          <a href="#conceitos" class="px-2.5 py-2 rounded-md hover:bg-gray-800 hover:text-[#F4D368] transition">OI × OC</a>
+          <a href="#ambiguidade" class="px-2.5 py-2 rounded-md hover:bg-gray-800 hover:text-[#F4D368] transition">Ambiguidade</a>
+          <a href="#tipologia" class="px-2.5 py-2 rounded-md hover:bg-gray-800 hover:text-[#F4D368] transition">Tipologias</a>
+          <a href="#exemplos-socs" class="px-2.5 py-2 rounded-md bg-teal-900/60 text-teal-300 hover:text-white transition">Exemplos SOCs</a>
+          <a href="#facetas" class="px-2.5 py-2 rounded-md hover:bg-gray-800 hover:text-[#F4D368] transition">Facetas</a>
+          <a href="#modelos-ri" class="px-2.5 py-2 rounded-md hover:bg-gray-800 hover:text-[#F4D368] transition">Modelos RI</a>
+          <a href="#debate" class="px-2.5 py-2 rounded-md hover:bg-gray-800 hover:text-[#F4D368] transition">Hjørland</a>
+          <a href="#quizz" class="px-2.5 py-2 rounded-md bg-[#C59B27] text-[#0C1B2A] font-bold hover:bg-[#F4D368] transition shadow">Quizz (10 Itens)</a>
+        </div>
+
+        <!-- Botão para Abrir Menu Retrátil -->
+        <div class="flex items-center gap-2">
+          <button id="toggle-nav-btn" onclick="toggleNavMenu()" class="p-2 rounded-lg bg-gray-800 hover:bg-gray-700 text-gray-200 text-sm flex items-center gap-1.5 focus:outline-none focus:ring-2 focus:ring-[#C59B27]">
+            <i class="ph ph-list text-lg"></i>
+            <span class="text-xs font-semibold uppercase tracking-wider">Tópicos</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAINEL RETRÁTIL EXPANSÍVEL DO MENU -->
+    <div id="collapsible-nav-panel" class="hidden bg-[#13283E] border-t border-gray-700 px-4 py-5 shadow-2xl transition-all">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex justify-between items-center mb-3 pb-2 border-b border-gray-700">
+          <span class="text-xs font-bold text-[#F4D368] uppercase tracking-wider flex items-center gap-1">
+            <i class="ph ph-compass"></i> Guia Rápido de Navegação por Módulos
+          </span>
+          <button onclick="toggleNavMenu()" class="text-xs text-gray-400 hover:text-white">Fechar [✕]</button>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-9 gap-2 text-xs">
+          <a href="#epistemologia" onclick="toggleNavMenu()" class="p-2.5 bg-gray-800/80 hover:bg-[#C59B27] hover:text-[#0C1B2A] rounded-lg transition font-medium flex flex-col items-center text-center">
+            <i class="ph ph-tree-structure text-lg mb-1"></i>
+            1. Epistemologia
+          </a>
+          <a href="#conceitos" onclick="toggleNavMenu()" class="p-2.5 bg-gray-800/80 hover:bg-[#C59B27] hover:text-[#0C1B2A] rounded-lg transition font-medium flex flex-col items-center text-center">
+            <i class="ph ph-cards text-lg mb-1"></i>
+            2. OI vs. OC
+          </a>
+          <a href="#ambiguidade" onclick="toggleNavMenu()" class="p-2.5 bg-gray-800/80 hover:bg-[#C59B27] hover:text-[#0C1B2A] rounded-lg transition font-medium flex flex-col items-center text-center">
+            <i class="ph ph-waveform text-lg mb-1"></i>
+            3. Ambiguidade
+          </a>
+          <a href="#tipologia" onclick="toggleNavMenu()" class="p-2.5 bg-gray-800/80 hover:bg-[#C59B27] hover:text-[#0C1B2A] rounded-lg transition font-medium flex flex-col items-center text-center">
+            <i class="ph ph-squares-four text-lg mb-1"></i>
+            4. Tipologias
+          </a>
+          <a href="#exemplos-socs" onclick="toggleNavMenu()" class="p-2.5 bg-teal-900/80 hover:bg-teal-500 hover:text-[#0C1B2A] text-teal-200 rounded-lg transition font-bold flex flex-col items-center text-center border border-teal-500/30">
+            <i class="ph ph-globe text-lg mb-1"></i>
+            5. Exemplos SOCs
+          </a>
+          <a href="#facetas" onclick="toggleNavMenu()" class="p-2.5 bg-gray-800/80 hover:bg-[#C59B27] hover:text-[#0C1B2A] rounded-lg transition font-medium flex flex-col items-center text-center">
+            <i class="ph ph-funnel text-lg mb-1"></i>
+            6. Facetas PMEST
+          </a>
+          <a href="#modelos-ri" onclick="toggleNavMenu()" class="p-2.5 bg-gray-800/80 hover:bg-[#C59B27] hover:text-[#0C1B2A] rounded-lg transition font-medium flex flex-col items-center text-center">
+            <i class="ph ph-magnifying-glass text-lg mb-1"></i>
+            7. Modelos RI
+          </a>
+          <a href="#debate" onclick="toggleNavMenu()" class="p-2.5 bg-gray-800/80 hover:bg-[#C59B27] hover:text-[#0C1B2A] rounded-lg transition font-medium flex flex-col items-center text-center">
+            <i class="ph ph-chats-circle text-lg mb-1"></i>
+            8. Pós-Google
+          </a>
+          <a href="#quizz" onclick="toggleNavMenu()" class="p-2.5 bg-[#C59B27] text-[#0C1B2A] font-bold hover:bg-[#F4D368] rounded-lg transition flex flex-col items-center text-center shadow">
+            <i class="ph ph-check-square-offset text-lg mb-1"></i>
+            9. Quizz (10 itens)
+          </a>
+        </div>
+        <div class="mt-3 pt-2 text-[11px] text-gray-400 flex flex-wrap gap-4 justify-between">
+          <span>Acesso direto à bibliografia: <a href="#referencias-abnt" onclick="toggleNavMenu()" class="text-[#F4D368] underline">Fontes e Referências ABNT</a></span>
+          <span><a href="#citacao-recurso" onclick="toggleNavMenu()" class="text-[#F4D368] underline">Como citar este recurso</a></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CABEÇALHO / HERO SECTION -->
+  <header id="inicio" class="bg-[#0C1B2A] text-white py-14 px-4 sm:px-6 lg:px-8 border-b-4 border-[#C59B27] relative overflow-hidden">
+    <div class="max-w-7xl mx-auto relative z-10">
+      
+      <!-- Badges Institucionais -->
+      <div class="flex flex-wrap items-center gap-2 mb-4">
+        <span class="badge bg-amber-500/20 text-[#F4D368] border border-amber-500/30">
+          <i class="ph ph-graduation-cap"></i> PPGCI • Pós-Graduação em Ciência da Informação
+        </span>
+        <span class="badge bg-teal-500/20 text-teal-300 border border-teal-500/30">
+          Conteúdos Digitais e suas Técnicas de Produção e de Preservação
+        </span>
+      </div>
+
+      <!-- Título Principal -->
+      <h1 class="font-cinzel text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white mb-3 leading-tight">
+        Sistemas de Organização do Conhecimento
+      </h1>
+      <p class="text-lg sm:text-xl text-[#F4D368] font-light max-w-4xl mb-6">
+        Organização, Classificação e Recuperação da Informação Digital: Como os SOCs estruturam os ecossistemas contemporâneos de informação.
+      </p>
+
+      <!-- Cartão de Autoria e Docência -->
+      <div class="bg-[#13283E]/80 backdrop-blur border border-gray-700/80 p-5 rounded-xl max-w-3xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-xs sm:text-sm">
+        <div class="space-y-1">
+          <p class="text-gray-300">
+            <strong class="text-white">Docência e Autoria do Recurso:</strong> Andréa Soares Rocha da Silva
+          </p>
+          <p class="text-gray-400 text-xs">
+            <i class="ph ph-lightbulb text-amber-400"></i> <em>Recurso pedagógico inspirado na aula da Profa. Dra. Laiana Ferreira de Sousa (UFC, 2025 - ver referências).</em>
+          </p>
+        </div>
+        <div class="flex-shrink-0">
+          <span class="px-3 py-1.5 bg-gray-800 text-gray-200 rounded-md border border-gray-600 text-xs font-mono">
+            Fortaleza - CE, 2026
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL (MÓDULOS TEMÁTICOS) -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+
+    <!-- SEÇÃO 1: EPISTEMOLOGIA E GENEALOGIA -->
+    <section id="epistemologia" class="space-y-6 scroll-mt-20">
+      <div class="border-b-2 border-[#C59B27] pb-3 flex items-center justify-between">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-[#1B6B65]">Módulo 1</span>
+          <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-[#0C1B2A]">Pressupostos Epistemológicos e Aspectos Históricos</h2>
+        </div>
+        <i class="ph ph-tree-structure text-3xl text-gray-400"></i>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Epistemologia da ORIC -->
+        <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-teal-50 text-[#1B6B65] flex items-center justify-center text-xl mb-4 font-bold">
+              <i class="ph ph-brain"></i>
+            </div>
+            <h3 class="font-bold text-[#0C1B2A] text-base mb-2">Por que estudar Epistemologia na ORIC?</h3>
+            <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
+              A epistemologia é a ciência do próprio conhecimento — o olhar crítico da ciência sobre si mesma. Para Santos, Neves e Souza (2019), a Organização do Conhecimento requer solidez epistemológica para validar as condições e possibilidades de legitimação do conhecimento científico (González de Gómez, 2001).
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-gray-100 text-[11px] text-[#1B6B65] font-semibold">
+            Santos, Neves & Souza (2019); González de Gómez (2001)
+          </div>
+        </div>
+
+        <!-- Genealogia Disciplinar -->
+        <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-amber-50 text-[#C59B27] flex items-center justify-center text-xl mb-4 font-bold">
+              <i class="ph ph-git-fork"></i>
+            </div>
+            <h3 class="font-bold text-[#0C1B2A] text-base mb-2">Da Biblioteconomia à Ciência da Informação</h3>
+            <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
+              A trajetória da ORIC ramifica-se a partir da <strong>Biblioteconomia</strong> (organização de acervos), <strong>Bibliografia</strong> (registro analítico) e <strong>Documentação</strong> (reunião e difusão documental), convergindo na <strong>Ciência da Informação</strong>, aliada às Tecnologias Digitais da Informação e Comunicação (TDIC).
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-gray-100 text-[11px] text-[#C59B27] font-semibold">
+            Evolução Histórico-Disciplinar
+          </div>
+        </div>
+
+        <!-- O Triângulo Essencial da OC -->
+        <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center text-xl mb-4 font-bold">
+              <i class="ph ph-arrows-clockwise"></i>
+            </div>
+            <h3 class="font-bold text-[#0C1B2A] text-base mb-2">A Tríade Mediadora da OC</h3>
+            <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
+              A Organização do Conhecimento opera como elemento mediador entre a <strong>Representação</strong> (substituição simbólica do conceito), a <strong>Organização</strong> (instrumentos postos em ação) e a <strong>Comunicação</strong> (recuperação eficiente, cujo êxito depende da estruturação sistemática).
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-gray-100 text-[11px] text-blue-700 font-semibold">
+            Representação ↔ Organização ↔ Comunicação
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 2: OI × OC E NATUREZA DA REPRESENTAÇÃO -->
+    <section id="conceitos" class="space-y-6 scroll-mt-20">
+      <div class="border-b-2 border-[#C59B27] pb-3 flex items-center justify-between">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-[#1B6B65]">Módulo 2</span>
+          <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-[#0C1B2A]">Distinção Conceitual: Organização da Informação (OI) × Organização do Conhecimento (OC)</h2>
+        </div>
+        <i class="ph ph-cards text-3xl text-gray-400"></i>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-8">
+        <!-- Comparativo OI x OC -->
+        <div class="bg-white p-6 sm:p-8 rounded-xl border border-gray-200 shadow-sm space-y-4">
+          <h3 class="font-cinzel font-bold text-lg text-[#0C1B2A] border-b pb-2">
+            Fundamentos de Bräscher e Café (2008, 2010)
+          </h3>
+          <div class="space-y-4 text-xs sm:text-sm text-gray-700">
+            <div class="p-4 bg-gray-50 rounded-lg border-l-4 border-blue-600">
+              <strong class="text-blue-900 block mb-1">Organização da Informação (OI)</strong>
+              Aplica-se às <em>ocorrências individuais de objetos informacionais</em>. Trata dos processos de descrição física (catalogação, metadados de suporte) e descrição temática pontual do suporte documental.
+            </div>
+            <div class="p-4 bg-amber-50/70 rounded-lg border-l-4 border-[#C59B27]">
+              <strong class="text-amber-900 block mb-1">Organização do Conhecimento (OC)</strong>
+              Aplica-se às <em>unidades do pensamento (conceitos)</em>. Busca compreender e estruturar domínios conceituais, teorias, modelos e relações semânticas para promover compreensões sistemáticas e perenes.
+            </div>
+            <p class="italic text-gray-600 text-xs">
+              "Se o conhecimento é intangível e cognitivo, organiza-se efetivamente a sua <strong>representação conceitual</strong> por meio dos SOCs." (Dahlberg, 1978; Hjørland, 2008).
+            </p>
+          </div>
+        </div>
+
+        <!-- Ciclo de Abstração Documental -->
+        <div class="bg-white p-6 sm:p-8 rounded-xl border border-gray-200 shadow-sm space-y-4">
+          <h3 class="font-cinzel font-bold text-lg text-[#0C1B2A] border-b pb-2">
+            O Funil de Abstração: Do Suporte aos Descritores
+          </h3>
+          <p class="text-xs sm:text-sm text-gray-600">
+            À medida que o documento físico é processado para a representação temática, ocorre uma <em>generalização crescente</em> combinada a uma potencial <em>perda de informação semântica</em>:
+          </p>
+          <div class="space-y-2 text-xs font-mono">
+            <div class="p-2.5 bg-gray-100 rounded text-gray-800 flex justify-between items-center">
+              <span>[1] DOCUMENTO</span>
+              <span class="text-[10px] uppercase font-sans text-gray-500">Suporte físico / digital integral</span>
+            </div>
+            <div class="p-2.5 bg-blue-50 text-blue-900 rounded flex justify-between items-center ml-3">
+              <span>[2] CONTEÚDO</span>
+              <span class="text-[10px] uppercase font-sans text-blue-600">Mensagem intrínseca veiculada</span>
+            </div>
+            <div class="p-2.5 bg-amber-50 text-amber-900 rounded flex justify-between items-center ml-6">
+              <span>[3] CONCEITOS</span>
+              <span class="text-[10px] uppercase font-sans text-amber-700">Unidades de pensamento abstraídas</span>
+            </div>
+            <div class="p-2.5 bg-[#0C1B2A] text-[#F4D368] rounded flex justify-between items-center ml-9 shadow">
+              <span>[4] DESCRITORES / SOC</span>
+              <span class="text-[10px] uppercase font-sans text-gray-300">Termos padronizados e indexados</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 3: O FENÔMENO DA AMBIGUIDADE NA RECUPERAÇÃO -->
+    <section id="ambiguidade" class="space-y-6 scroll-mt-20">
+      <div class="border-b-2 border-[#C59B27] pb-3 flex items-center justify-between">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-[#1B6B65]">Módulo 3</span>
+          <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-[#0C1B2A]">O Fenômeno da Ambiguidade Linguística e o Ruído na RI</h2>
+        </div>
+        <i class="ph ph-waveform text-3xl text-gray-400"></i>
+      </div>
+
+      <p class="text-xs sm:text-sm text-gray-700 max-w-4xl">
+        Na Recuperação da Informação, <strong>ambiguidade = ruído</strong>. Quando um termo admite múltiplos significados ou papéis sintáticos, o sistema recupera registros irrelevantes. Os SOCs atuam como estabilizadores semânticos para mitigar essas distorções:
+      </p>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        <!-- 1. Morfológica -->
+        <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm space-y-2">
+          <span class="badge bg-purple-100 text-purple-800">1. Morfológica</span>
+          <h4 class="font-bold text-sm text-[#0C1B2A]">Policategorização</h4>
+          <p class="text-xs text-gray-600 leading-relaxed">
+            A palavra pode pertencer a classes gramaticais distintas.
+          </p>
+          <div class="p-2 bg-gray-50 rounded text-[11px] text-gray-700 font-mono">
+            Ex.: <strong>proposta</strong> (substantivo, adjetivo ou verbo).
+          </div>
+        </div>
+
+        <!-- 2. Lexical -->
+        <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm space-y-2">
+          <span class="badge bg-amber-100 text-amber-900">2. Lexical</span>
+          <h4 class="font-bold text-sm text-[#0C1B2A]">Polissemia & Homografia</h4>
+          <p class="text-xs text-gray-600 leading-relaxed">
+            Mesma grafia para conceitos ou significados múltiplos.
+          </p>
+          <div class="p-2 bg-gray-50 rounded text-[11px] text-gray-700 font-mono">
+            Ex.: <strong>cobre</strong> (metal × verbo); <strong>arquivo</strong> (móvel × instituição).
+          </div>
+        </div>
+
+        <!-- 3. Sintática -->
+        <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm space-y-2">
+          <span class="badge bg-blue-100 text-blue-900">3. Sintática</span>
+          <h4 class="font-bold text-sm text-[#0C1B2A]">Relação Argumental</h4>
+          <p class="text-xs text-gray-600 leading-relaxed">
+            Indefinição de quem é o agente ou paciente da ação.
+          </p>
+          <div class="p-2 bg-gray-50 rounded text-[11px] text-gray-700 font-mono">
+            Ex.: <em>"A crítica do autor"</em> (o autor criticou ou foi criticado?).
+          </div>
+        </div>
+
+        <!-- 4. Semântica -->
+        <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm space-y-2">
+          <span class="badge bg-teal-100 text-teal-900">4. Semântica</span>
+          <h4 class="font-bold text-sm text-[#0C1B2A]">Operadores Lógicos</h4>
+          <p class="text-xs text-gray-600 leading-relaxed">
+            Dúvidas nas relações de causa, negação ou quantificação.
+          </p>
+          <div class="p-2 bg-gray-50 rounded text-[11px] text-gray-700 font-mono">
+            Ex.: <em>"Ela não chora mais porque ele partiu"</em> (causa da parada ou do choro?).
+          </div>
+        </div>
+
+        <!-- 5. Pragmática -->
+        <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm space-y-2">
+          <span class="badge bg-rose-100 text-rose-900">5. Pragmática</span>
+          <h4 class="font-bold text-sm text-[#0C1B2A]">Contexto Enunciativo</h4>
+          <p class="text-xs text-gray-600 leading-relaxed">
+            Dependência estrita do contexto situacional compartilhado.
+          </p>
+          <div class="p-2 bg-gray-50 rounded text-[11px] text-gray-700 font-mono">
+            Ex.: <em>"Paulo vai à escola"</em> (afirmação genérica × ação presente).
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 4: TIPOLOGIAS E MATRIZ DOS SOCS -->
+    <section id="tipologia" class="space-y-6 scroll-mt-20">
+      <div class="border-b-2 border-[#C59B27] pb-3 flex items-center justify-between">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-[#1B6B65]">Módulo 4</span>
+          <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-[#0C1B2A]">Tipologia dos SOCs: De Gail Hodge (2000) a Vickery e Pontes Junior (2013)</h2>
+        </div>
+        <i class="ph ph-squares-four text-3xl text-gray-400"></i>
+      </div>
+
+      <!-- Tipologia Tridimensional de Gail Hodge (2000) -->
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white p-6 rounded-xl border-t-4 border-emerald-600 shadow-sm">
+          <span class="text-xs font-bold text-emerald-800 uppercase">Grupo 1 (Hodge, 2000)</span>
+          <h3 class="font-bold text-base text-[#0C1B2A] mt-1 mb-3">Listas de Termos</h3>
+          <p class="text-xs text-gray-600 mb-3">Estrutura mais fraca e baixa complexidade relacional. Controle terminológico inicial.</p>
+          <ul class="text-xs text-gray-700 space-y-1.5 font-medium">
+            <li class="flex items-center gap-1.5"><i class="ph ph-check text-emerald-600"></i> Listas de Autoridade</li>
+            <li class="flex items-center gap-1.5"><i class="ph ph-check text-emerald-600"></i> Glossários</li>
+            <li class="flex items-center gap-1.5"><i class="ph ph-check text-emerald-600"></i> Dicionários</li>
+            <li class="flex items-center gap-1.5"><i class="ph ph-check text-emerald-600"></i> Gazetteers (Dicionários Geográficos)</li>
+          </ul>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl border-t-4 border-amber-600 shadow-sm">
+          <span class="text-xs font-bold text-amber-800 uppercase">Grupo 2 (Hodge, 2000)</span>
+          <h3 class="font-bold text-base text-[#0C1B2A] mt-1 mb-3">Classificações e Categorias</h3>
+          <p class="text-xs text-gray-600 mb-3">Estrutura hierárquica e categorização sistemática de domínios do saber.</p>
+          <ul class="text-xs text-gray-700 space-y-1.5 font-medium">
+            <li class="flex items-center gap-1.5"><i class="ph ph-check text-amber-600"></i> Cabeçalhos de Assunto</li>
+            <li class="flex items-center gap-1.5"><i class="ph ph-check text-amber-600"></i> Esquemas de Classificação (CDD, CDU)</li>
+            <li class="flex items-center gap-1.5"><i class="ph ph-check text-amber-600"></i> Taxonomias</li>
+            <li class="flex items-center gap-1.5"><i class="ph ph-check text-amber-600"></i> Esquemas de Categorização</li>
+          </ul>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl border-t-4 border-indigo-600 shadow-sm">
+          <span class="text-xs font-bold text-indigo-800 uppercase">Grupo 3 (Hodge, 2000)</span>
+          <h3 class="font-bold text-base text-[#0C1B2A] mt-1 mb-3">Listas de Relacionamentos</h3>
+          <p class="text-xs text-gray-600 mb-3">Estrutura forte, alta expressividade semântica e suporte à inferência computacional.</p>
+          <ul class="text-xs text-gray-700 space-y-1.5 font-medium">
+            <li class="flex items-center gap-1.5"><i class="ph ph-check text-indigo-600"></i> Tesauros (TG, TE, TR, UP)</li>
+            <li class="flex items-center gap-1.5"><i class="ph ph-check text-indigo-600"></i> Redes Semânticas & Mapas Conceituais</li>
+            <li class="flex items-center gap-1.5"><i class="ph ph-check text-indigo-600"></i> Ontologias (Linguagens OWL, RDF)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 5: EXEMPLOS PRÁTICOS DE SOCS COM ACESSO ABERTO -->
+    <section id="exemplos-socs" class="space-y-6 scroll-mt-20">
+      <div class="border-b-2 border-[#1B6B65] pb-3 flex items-center justify-between">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-[#1B6B65]">Módulo 5 • Instrumentos em Uso</span>
+          <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-[#0C1B2A]">Exemplos Reais de Sistemas de Organização do Conhecimento</h2>
+        </div>
+        <i class="ph ph-globe text-3xl text-[#1B6B65]"></i>
+      </div>
+
+      <p class="text-xs sm:text-sm text-gray-700 max-w-4xl">
+        Conheça os principais instrumentos de controle terminológico, tesauros, taxonomias e esquemas de classificação utilizados no Brasil e no mundo. Os instrumentos em <strong>acesso aberto</strong> possuem links diretos ativos para navegação e consulta técnica:
+      </p>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        
+        <!-- Exemplo 1: DeCS -->
+        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm space-y-3 flex flex-col justify-between hover:border-[#1B6B65] transition">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="badge bg-emerald-100 text-emerald-800">Acesso Aberto</span>
+              <span class="text-xs font-bold text-gray-500">Saúde</span>
+            </div>
+            <h3 class="font-bold text-sm text-[#0C1B2A]">DeCS – Descritores em Ciências da Saúde</h3>
+            <p class="text-xs text-gray-600 leading-relaxed">
+              Vocabulário controlado trilíngue (português, espanhol e inglês) criado pela BIREME/OPAS/OMS para indexação e recuperação de literatura médica na BVS e PubMed.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-gray-100">
+            <a href="https://decs.bvsalud.org/" target="_blank" rel="noopener noreferrer" class="soc-link text-xs">
+              <i class="ph ph-arrow-square-out"></i> Acessar Portal do DeCS
+            </a>
+          </div>
+        </div>
+
+        <!-- Exemplo 2: Tesauro IBICT -->
+        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm space-y-3 flex flex-col justify-between hover:border-[#1B6B65] transition">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="badge bg-emerald-100 text-emerald-800">Acesso Aberto</span>
+              <span class="text-xs font-bold text-gray-500">Ciência da Informação</span>
+            </div>
+            <h3 class="font-bold text-sm text-[#0C1B2A]">Tesauro Brasileiro de Ciência da Informação (TBCI)</h3>
+            <p class="text-xs text-gray-600 leading-relaxed">
+              Desenvolvido pelo IBICT, padroniza as relações conceituais hierárquicas, associativas e de equivalência no domínio da Ciência da Informação no Brasil.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-gray-100">
+            <a href="https://www.gov.br/ibict/pt-br/site-ibict-2025/central-de-conteudos/publicacoes/TESAUROCOMPLETOFINALCOMCAPA_24102014.pdf/@@display-file/file" target="_blank" rel="noopener noreferrer" class="soc-link text-xs">
+              <i class="ph ph-file-pdf"></i> Acessar Tesauro IBICT (PDF)
+            </a>
+          </div>
+        </div>
+
+        <!-- Exemplo 3: Vocabulário Controlado USP (DEDALUS) -->
+        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm space-y-3 flex flex-col justify-between hover:border-[#1B6B65] transition">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="badge bg-emerald-100 text-emerald-800">Acesso Aberto</span>
+              <span class="text-xs font-bold text-gray-500">Multidisciplinar</span>
+            </div>
+            <h3 class="font-bold text-sm text-[#0C1B2A]">Vocabulário Controlado do Sistema DEDALUS (USP)</h3>
+            <p class="text-xs text-gray-600 leading-relaxed">
+              Vocabulário institucional multidisciplinar gerido pela Agência de Bibliotecas e Coleções Digitais (ABCD-USP) para catalogação unificada dos acervos da Universidade.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-gray-100">
+            <a href="https://vocabusp.abcd.usp.br/Vocab/" target="_blank" rel="noopener noreferrer" class="soc-link text-xs">
+              <i class="ph ph-arrow-square-out"></i> Acessar Vocabulário USP
+            </a>
+          </div>
+        </div>
+
+        <!-- Exemplo 4: Tesauro da UNESCO -->
+        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm space-y-3 flex flex-col justify-between hover:border-[#1B6B65] transition">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="badge bg-emerald-100 text-emerald-800">Acesso Aberto</span>
+              <span class="text-xs font-bold text-gray-500">Educação e Cultura</span>
+            </div>
+            <h3 class="font-bold text-sm text-[#0C1B2A]">Tesauro da UNESCO (UNESCO Thesaurus)</h3>
+            <p class="text-xs text-gray-600 leading-relaxed">
+              Lista estruturada e multilíngue de termos para análise e recuperação em educação, ciências naturais, ciências sociais e humanas, cultura e comunicação.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-gray-100">
+            <a href="https://vocabularies.unesco.org/browser/thesaurus/en/" target="_blank" rel="noopener noreferrer" class="soc-link text-xs">
+              <i class="ph ph-arrow-square-out"></i> Navegar no Tesauro UNESCO
+            </a>
+          </div>
+        </div>
+
+        <!-- Exemplo 5: EuroVoc -->
+        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm space-y-3 flex flex-col justify-between hover:border-[#1B6B65] transition">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="badge bg-emerald-100 text-emerald-800">Acesso Aberto</span>
+              <span class="text-xs font-bold text-gray-500">União Europeia</span>
+            </div>
+            <h3 class="font-bold text-sm text-[#0C1B2A]">EuroVoc – Tesauro Multilíngue da União Europeia</h3>
+            <p class="text-xs text-gray-600 leading-relaxed">
+              Tesauro multidisciplinar cobrindo as atividades da UE em 24 idiomas oficiais. Adotado para padronização jurídica, institucional e governamental na Europa.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-gray-100">
+            <a href="https://eur-lex.europa.eu/browse/eurovoc.html?locale=pt" target="_blank" rel="noopener noreferrer" class="soc-link text-xs">
+              <i class="ph ph-arrow-square-out"></i> Consultar no EUR-Lex
+            </a>
+          </div>
+        </div>
+
+        <!-- Exemplo 6: Repositório ARES / UNA-SUS -->
+        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm space-y-3 flex flex-col justify-between hover:border-[#1B6B65] transition">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="badge bg-emerald-100 text-emerald-800">Acesso Aberto</span>
+              <span class="text-xs font-bold text-gray-500">Recursos Digitais</span>
+            </div>
+            <h3 class="font-bold text-sm text-[#0C1B2A]">Repositório ARES (UNA-SUS / Fiocruz)</h3>
+            <p class="text-xs text-gray-600 leading-relaxed">
+              Acervo de Recursos Educacionais em Saúde com taxonomia facetada e busca pós-coordenada estruturada por meio de termos do vocabulário controlado DeCS.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-gray-100">
+            <a href="https://ares.unasus.gov.br/" target="_blank" rel="noopener noreferrer" class="soc-link text-xs">
+              <i class="ph ph-arrow-square-out"></i> Acessar Repositório ARES
+            </a>
+          </div>
+        </div>
+
+        <!-- Exemplo 7: Library of Congress Authorities (LCSH) -->
+        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm space-y-3 flex flex-col justify-between hover:border-[#1B6B65] transition">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="badge bg-emerald-100 text-emerald-800">Acesso Aberto</span>
+              <span class="text-xs font-bold text-gray-500">Cabeçalhos de Assunto</span>
+            </div>
+            <h3 class="font-bold text-sm text-[#0C1B2A]">Library of Congress Authorities & Linked Data</h3>
+            <p class="text-xs text-gray-600 leading-relaxed">
+              Serviço de autoridades e vocabulários controlados da Biblioteca do Congresso dos EUA (LCSH/NAF), disponível para consulta e interoperabilidade em Linked Data.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-gray-100">
+            <a href="https://id.loc.gov/authorities/subjects.html" target="_blank" rel="noopener noreferrer" class="soc-link text-xs">
+              <i class="ph ph-arrow-square-out"></i> Consultar Authorities LOC
+            </a>
+          </div>
+        </div>
+
+        <!-- Exemplo 8: AGROVOC (FAO / Nações Unidas) -->
+        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm space-y-3 flex flex-col justify-between hover:border-[#1B6B65] transition">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="badge bg-emerald-100 text-emerald-800">Acesso Aberto</span>
+              <span class="text-xs font-bold text-gray-500">Ciências Agrárias</span>
+            </div>
+            <h3 class="font-bold text-sm text-[#0C1B2A]">AGROVOC (FAO / Nações Unidas)</h3>
+            <p class="text-xs text-gray-600 leading-relaxed">
+              Tesauro multilíngue e rede semântica estruturada em SKOS-XL cobrindo conceitos de agricultura, alimentação, nutrição e pesca em mais de 40 línguas.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-gray-100">
+            <a href="https://agrovoc.fao.org/browse/agrovoc/en/" target="_blank" rel="noopener noreferrer" class="soc-link text-xs">
+              <i class="ph ph-arrow-square-out"></i> Navegar no AGROVOC
+            </a>
+          </div>
+        </div>
+
+        <!-- Exemplo 9: CDD / WebDewey (Comercial / Assinatura) -->
+        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm space-y-3 flex flex-col justify-between">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="badge bg-gray-100 text-gray-700 border border-gray-300">Acesso sob Assinatura</span>
+              <span class="text-xs font-bold text-gray-500">Classificação Decimal</span>
+            </div>
+            <h3 class="font-bold text-sm text-[#0C1B2A]">WebDewey / CDD (OCLC)</h3>
+            <p class="text-xs text-gray-600 leading-relaxed">
+              Esquema clássico de Classificação Decimal de Dewey, amplamente utilizado em bibliotecas públicas e universitárias. A versão digital oficial (WebDewey) é mantida sob licença comercial pela OCLC.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-gray-100 text-xs text-gray-500">
+            <span class="flex items-center gap-1.5"><i class="ph ph-lock-key"></i> Disponível mediante assinatura institucional na OCLC</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SEÇÃO 6: ANÁLISE EM FACETAS E SIMULADOR INTERATIVO -->
+    <section id="facetas" class="space-y-6 scroll-mt-20">
+      <div class="border-b-2 border-[#C59B27] pb-3 flex items-center justify-between">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-[#1B6B65]">Módulo 6</span>
+          <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-[#0C1B2A]">Classificação Facetada e Aplicação nos Repositórios Digitais</h2>
+        </div>
+        <i class="ph ph-funnel text-3xl text-gray-400"></i>
+      </div>
+
+      <!-- Fundamentação PMEST -->
+      <div class="grid md:grid-cols-5 gap-3">
+        <div class="bg-white p-4 rounded-xl border border-gray-200 text-center shadow-sm">
+          <span class="font-cinzel text-xl font-bold text-[#C59B27] block">P</span>
+          <h4 class="font-bold text-xs text-[#0C1B2A]">Personalidade</h4>
+          <p class="text-[11px] text-gray-500 mt-1">O quê / Quem é o objeto central investigado.</p>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-gray-200 text-center shadow-sm">
+          <span class="font-cinzel text-xl font-bold text-[#C59B27] block">M</span>
+          <h4 class="font-bold text-xs text-[#0C1B2A]">Matéria</h4>
+          <p class="text-[11px] text-gray-500 mt-1">Substância, propriedade ou tema constitutivo.</p>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-gray-200 text-center shadow-sm">
+          <span class="font-cinzel text-xl font-bold text-[#C59B27] block">E</span>
+          <h4 class="font-bold text-xs text-[#0C1B2A]">Energia</h4>
+          <p class="text-[11px] text-gray-500 mt-1">Ação, operação, processo, intervenção ou método.</p>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-gray-200 text-center shadow-sm">
+          <span class="font-cinzel text-xl font-bold text-[#C59B27] block">S</span>
+          <h4 class="font-bold text-xs text-[#0C1B2A]">Espaço</h4>
+          <p class="text-[11px] text-gray-500 mt-1">Localização geográfica, territorial ou ambiental.</p>
+        </div>
+        <div class="bg-white p-4 rounded-xl border border-gray-200 text-center shadow-sm">
+          <span class="font-cinzel text-xl font-bold text-[#C59B27] block">T</span>
+          <h4 class="font-bold text-xs text-[#0C1B2A]">Tempo</h4>
+          <p class="text-[11px] text-gray-500 mt-1">Período temporal, época ou marco cronológico.</p>
+        </div>
+      </div>
+
+      <!-- Simulador Interativo Inspirado no Repositório ARES / UNA-SUS -->
+      <div class="bg-white p-6 sm:p-8 rounded-xl border border-gray-200 shadow-md space-y-6">
+        <div class="border-b border-gray-200 pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <h3 class="font-cinzel font-bold text-lg text-[#0C1B2A] flex items-center gap-2">
+              <i class="ph ph-laptop"></i> Simulador de Busca Facetada (Estudo de Caso: Repositório ARES)
+            </h3>
+            <p class="text-xs text-gray-600">Teste como as facetas pós-coordenadas filtram recursos educacionais digitais em saúde.</p>
+          </div>
+          <button onclick="resetFacets()" class="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded text-xs font-semibold self-start">
+            Resetar Filtros
+          </button>
+        </div>
+
+        <!-- Filtros Facetados -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 bg-gray-50 p-4 rounded-lg">
+          <div>
+            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Faceta: Tipo de Recurso</label>
+            <select id="facet-type" onchange="filterAresResources()" class="w-full text-xs p-2 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#C59B27] focus:outline-none">
+              <option value="all">Todos os Tipos</option>
+              <option value="Audio">Áudio / Podcast</option>
+              <option value="Infografico">Infográfico / Imagem</option>
+              <option value="Texto">Documento Técnico / Texto</option>
+              <option value="Video">Vídeo / Animação</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Faceta: Descritor Temático (DeCS)</label>
+            <select id="facet-decs" onchange="filterAresResources()" class="w-full text-xs p-2 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#C59B27] focus:outline-none">
+              <option value="all">Todos os Termos</option>
+              <option value="Hepatite">Hepatite Viral</option>
+              <option value="Saude da Familia">Saúde da Família</option>
+              <option value="COVID-19">COVID-19 / Infecções</option>
+              <option value="Hipertensao">Hipertensão Arterial</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Faceta: Instituição Ofertante</label>
+            <select id="facet-inst" onchange="filterAresResources()" class="w-full text-xs p-2 bg-white border border-gray-300 rounded focus:ring-2 focus:ring-[#C59B27] focus:outline-none">
+              <option value="all">Todas as Instituições</option>
+              <option value="UFMA">UFMA</option>
+              <option value="UFC">UFC</option>
+              <option value="FIOCRUZ">FIOCRUZ</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Resultados Filtrados -->
+        <div>
+          <div class="flex justify-between items-center mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Recursos Recuperados no Repositório:</span>
+            <span id="ares-counter" class="text-xs font-mono font-bold text-[#1B6B65]">Exibindo 4 de 4 recursos</span>
+          </div>
+          <div id="ares-results-container" class="grid sm:grid-cols-2 gap-3">
+            <!-- Injetado via JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 7: MODELOS DE RECUPERAÇÃO DA INFORMAÇÃO -->
+    <section id="modelos-ri" class="space-y-6 scroll-mt-20">
+      <div class="border-b-2 border-[#C59B27] pb-3 flex items-center justify-between">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-[#1B6B65]">Módulo 7</span>
+          <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-[#0C1B2A]">Modelos de Recuperação da Informação: Do Booleano às Abordagens Semânticas</h2>
+        </div>
+        <i class="ph ph-magnifying-glass text-3xl text-gray-400"></i>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Booleano -->
+        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <span class="badge bg-gray-100 text-gray-800 mb-2">Clássico</span>
+            <h3 class="font-bold text-base text-[#0C1B2A]">Modelo Booleano</h3>
+            <p class="text-xs text-gray-600 mt-2">
+              Baseado na álgebra de Boole e teoria dos conjuntos. As buscas utilizam operadores lógicos (AND, OR, NOT).
+            </p>
+            <div class="mt-3 text-xs space-y-1">
+              <p><strong>Vantagem:</strong> Rápido, previsível e formalmente rigoroso.</p>
+              <p class="text-red-700"><strong>Limite:</strong> Relevância binária (0 ou 1); não ranqueia os resultados por ordem de relevância.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vetorial -->
+        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <span class="badge bg-blue-100 text-blue-800 mb-2">Álgebra Linear</span>
+            <h3 class="font-bold text-base text-[#0C1B2A]">Modelo Vetorial (VSM)</h3>
+            <p class="text-xs text-gray-600 mt-2">
+              Representa documentos e queries como vetores em um espaço n-dimensional. Mede a similaridade via cosseno dos ângulos.
+            </p>
+            <div class="mt-3 text-xs space-y-1">
+              <p><strong>Vantagem:</strong> Permite ranking graduado e ponderação por pesos (TF-IDF).</p>
+              <p class="text-red-700"><strong>Limite:</strong> Assume independência ortogonal entre os termos da busca.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Probabilístico -->
+        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <span class="badge bg-amber-100 text-amber-900 mb-2">Teoria da Decisão</span>
+            <h3 class="font-bold text-base text-[#0C1B2A]">Modelo Probabilístico</h3>
+            <p class="text-xs text-gray-600 mt-2">
+              Calcula a probabilidade de um documento ser relevante para o usuário a partir do histórico e feedback de relevância.
+            </p>
+            <div class="mt-3 text-xs space-y-1">
+              <p><strong>Vantagem:</strong> Incorpora incerteza e refina resultados interativamente.</p>
+              <p class="text-red-700"><strong>Limite:</strong> Exige interação contínua e maior custo computacional.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 8: O DEBATE PÓS-GOOGLE (HJØRLAND) -->
+    <section id="debate" class="space-y-6 scroll-mt-20">
+      <div class="border-b-2 border-[#C59B27] pb-3 flex items-center justify-between">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-[#1B6B65]">Módulo 8</span>
+          <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-[#0C1B2A]">O Debate Crítico Contemporâneo: "Is Classification Necessary After Google?"</h2>
+        </div>
+        <i class="ph ph-chats-circle text-3xl text-gray-400"></i>
+      </div>
+
+      <div class="bg-[#0C1B2A] text-white p-6 sm:p-8 rounded-xl shadow-lg border-l-8 border-[#C59B27]">
+        <div class="flex items-start gap-4">
+          <i class="ph ph-quotes text-4xl text-[#C59B27] flex-shrink-0"></i>
+          <div class="space-y-4 text-xs sm:text-sm">
+            <h3 class="font-cinzel text-lg font-bold text-[#F4D368]">
+              A Tese de Birger Hjørland (Journal of Documentation, 2012)
+            </h3>
+            <p class="text-gray-300 leading-relaxed">
+              Muitos supunham que a eficácia dos algoritmos de busca em texto livre tornaria os sistemas de classificação e os vocabulários controlados obsoletos. Hjørland desconstrói essa ilusão: motores de busca baseados unicamente em palavras e links são incapazes de resolver os problemas epistêmicos da dispersão semântica, da polissemia profunda e da autoridade epistemológica disciplinar.
+            </p>
+            <div class="grid sm:grid-cols-2 gap-4 pt-2">
+              <div class="bg-white/5 p-3 rounded-lg border border-white/10">
+                <strong class="text-amber-300 block mb-1">1. Limites do Algoritmo Cego</strong>
+                A busca algorítmica privilegia popularidade e frequência, falhando quando a pesquisa científica exige exaustividade sistemática de conceitos e síntese de domínio.
+              </div>
+              <div class="bg-white/5 p-3 rounded-lg border border-white/10">
+                <strong class="text-amber-300 block mb-1">2. O Papel Estruturante do SOC</strong>
+                A classificação não é mero indexador mecânico: ela explicita os paradigmas científicos, organiza a herança conceitual das disciplinas e orienta o pesquisador na literatura especializada.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 9: QUIZZ COM 10 ITENS SOBRE A MATÉRIA (ANTES DAS REFERÊNCIAS) -->
+    <section id="quizz" class="space-y-6 scroll-mt-20">
+      <div class="border-b-2 border-[#C59B27] pb-3 flex items-center justify-between">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-[#1B6B65]">Módulo 9</span>
+          <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-[#0C1B2A]">Quizz Avaliativo de Aprendizagem (10 Itens)</h2>
+        </div>
+        <span class="badge bg-[#C59B27] text-[#0C1B2A] font-bold">Fixação do Conteúdo</span>
+      </div>
+
+      <p class="text-xs sm:text-sm text-gray-700">
+        Responda às 10 questões abaixo para avaliar sua assimilação sobre os fundamentos epistemológicos, tipologia dos SOCs, análise facetada e modelos de recuperação. Clique na opção desejada para visualizar o feedback analítico imediato.
+      </p>
+
+      <!-- Formulário do Quizz Interativo -->
+      <div id="quiz-container" class="space-y-6">
+        <!-- As 10 questões serão renderizadas aqui via JS para controle de pontuação e explicações -->
+      </div>
+
+      <!-- Placar Final do Quizz -->
+      <div id="quiz-score-card" class="hidden bg-white p-6 rounded-xl border border-gray-200 shadow-md text-center space-y-3">
+        <h3 class="font-cinzel text-xl font-bold text-[#0C1B2A]">Desempenho no Quizz</h3>
+        <p id="quiz-score-text" class="text-sm font-semibold text-gray-700"></p>
+        <button onclick="resetQuiz()" class="px-5 py-2 bg-[#0C1B2A] text-white hover:bg-[#C59B27] hover:text-[#0C1B2A] rounded-lg text-xs font-bold transition">
+          Refazer o Quizz
+        </button>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 10: REFERÊNCIAS EM PADRÃO ABNT COMO TEXTO RETRÁTIL (ANO DA LAIANA AJUSTADO PARA 2025) -->
+    <section id="referencias-abnt" class="space-y-6 scroll-mt-20">
+      <div class="border-b-2 border-[#C59B27] pb-3 flex items-center justify-between">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-[#1B6B65]">Fontes e Fundamentação</span>
+          <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-[#0C1B2A]">Referências Bibliográficas das Obras Estudadas (ABNT NBR 6023)</h2>
+        </div>
+        <i class="ph ph-books text-3xl text-gray-400"></i>
+      </div>
+
+      <!-- Componente Acordeão Retrátil Detalhado -->
+      <details class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm group">
+        <summary class="p-5 bg-gray-50 hover:bg-gray-100 cursor-pointer flex justify-between items-center transition select-none">
+          <div class="flex items-center gap-3">
+            <span class="w-8 h-8 rounded-full bg-[#0C1B2A] text-[#F4D368] flex items-center justify-center font-bold text-sm">
+              <i class="ph ph-list-numbers"></i>
+            </span>
+            <div>
+              <h3 class="font-bold text-sm text-[#0C1B2A]">Lista Bibliográfica das Fontes e Material Didático de Base</h3>
+              <p class="text-xs text-gray-500">Clique para expandir/recolher os registros bibliográficos normatizados em ABNT</p>
+            </div>
+          </div>
+          <span class="text-xs font-bold text-[#C59B27] group-open:rotate-180 transition-transform">
+            <i class="ph ph-caret-down text-lg"></i>
+          </span>
+        </summary>
+
+        <div class="p-6 bg-white space-y-5 text-xs sm:text-sm text-gray-800 divide-y divide-gray-100">
+          
+          <!-- Fonte 0: Slides da Profa. Laiana (Ano corrigido para 2025) -->
+          <div class="pt-3 first:pt-0">
+            <p class="font-mono text-gray-900 leading-relaxed font-semibold">
+              SOUSA, Laiana Ferreira de. <strong>Organização, Classificação e Recuperação da Informação Digital</strong>: como os SOC's estruturam o conteúdo digital para otimizar a Recuperação da Informação (RI). 58 slides. Material didático apresentado na disciplina Conteúdos Digitais e suas Técnicas de Produção e de Preservação, Programa de Pós-Graduação em Ciência da Informação, Departamento de Ciências da Informação, Universidade Federal do Ceará (UFC), Fortaleza, 2025.
+            </p>
+            <div class="mt-2 text-xs bg-amber-50 p-2.5 rounded border border-amber-200 text-amber-900">
+              <strong>Nota Pedagógica:</strong> Fonte basilar de inspiração estrutural, conceitual e imagética para o desenvolvimento deste infográfico interativo.
+            </div>
+          </div>
+
+          <!-- Fonte 1: González de Gómez (2001) -->
+          <div class="pt-3">
+            <p class="font-mono text-gray-900 leading-relaxed">
+              GONZÁLEZ DE GÓMEZ, M. N. Para uma reflexão epistemológica acerca da Ciência da Informação. <strong>Perspectivas em Ciência da Informação</strong>, Belo Horizonte, v. 6, n. 1, p. 5-18, jan./jun. 2001.
+            </p>
+          </div>
+
+          <!-- Fonte 2: Hjørland (2012) -->
+          <div class="pt-3">
+            <p class="font-mono text-gray-900 leading-relaxed">
+              HJØRLAND, B. Is classification necessary after Google? <strong>Journal of Documentation</strong>, v. 68, n. 3, p. 299-317, 2012.
+            </p>
+          </div>
+
+          <!-- Fonte 3: Hodge (2000) -->
+          <div class="pt-3">
+            <p class="font-mono text-gray-900 leading-relaxed">
+              HODGE, G. <strong>Systems of Knowledge Organization for Digital Libraries</strong>: beyond traditional authority files. Washington, D.C.: Council on Library and Information Resources (CLIR), Pub 91, 2000.
+            </p>
+          </div>
+
+          <!-- Fonte 4: Moreira (2018) -->
+          <div class="pt-3">
+            <p class="font-mono text-gray-900 leading-relaxed">
+              MOREIRA, W. <strong>Sistemas de organização do conhecimento</strong>: aspectos teóricos, conceituais e metodológicos. 2018. Tese (Livre-Docência em Sistemas de Organização do Conhecimento) – Faculdade de Filosofia e Ciências, Universidade Estadual Paulista (UNESP), Marília, 2018.
+            </p>
+          </div>
+
+          <!-- Fonte 5: Pontes Junior et al. (2013) -->
+          <div class="pt-3">
+            <p class="font-mono text-gray-900 leading-relaxed">
+              PONTES JUNIOR, J. de; CARVALHO, R. A. de; AZEVEDO, A. W. Da recuperação da informação à recuperação do conhecimento: reflexões e propostas. <strong>Perspectivas em Ciência da Informação</strong>, Belo Horizonte, v. 18, n. 4, p. 2-17, 2013.
+            </p>
+          </div>
+
+          <!-- Fonte 6: Ranganathan (1967) -->
+          <div class="pt-3">
+            <p class="font-mono text-gray-900 leading-relaxed">
+              RANGANATHAN, S. R. <strong>Prolegomena to Library Classification</strong>. 3. ed. Bombay: Asia Publishing House, 1967.
+            </p>
+          </div>
+
+          <!-- Fonte 7: Santos, Neves e Souza (2019) -->
+          <div class="pt-3">
+            <p class="font-mono text-gray-900 leading-relaxed">
+              SANTOS, R. F. D.; NEVES, D. A. B.; SOUZA, E. D. A organização do conhecimento como domínio de estudo da ciência da informação: uma reflexão a partir dos aspectos epistemológicos. <em>In</em>: ENCONTRO NACIONAL DE PESQUISA EM CIÊNCIA DA INFORMAÇÃO, 20., 2019, Florianópolis. <strong>Anais [...]</strong>. Florianópolis: ENANCIB, 2019. p. 95-104.
+            </p>
+          </div>
+
+          <!-- Fonte 8: Vickery (1960) -->
+          <div class="pt-3">
+            <p class="font-mono text-gray-900 leading-relaxed">
+              VICKERY, B. C. <strong>Faceted Classification</strong>: a guide to construction and use of special schemes. London: Aslib, 1960.
+            </p>
+          </div>
+
+          <!-- Fonte 9: Vickery (2008) -->
+          <div class="pt-3">
+            <p class="font-mono text-gray-900 leading-relaxed">
+              VICKERY, B. C. Faceted classification for the web. <strong>Axiomathes</strong>, v. 18, n. 2, p. 145-160, 2008.
+            </p>
+          </div>
+
+        </div>
+      </details>
+    </section>
+
+    <!-- SEÇÃO 11: REFERÊNCIA E CITAÇÃO DO RECURSO (ABNT NBR 6023 / NBR 10520) -->
+    <section id="citacao-recurso" class="bg-white p-6 sm:p-8 rounded-xl border border-gray-300 shadow-md space-y-6">
+      <div class="border-b border-gray-200 pb-3">
+        <span class="text-xs font-bold uppercase tracking-wider text-[#1B6B65]">Créditos Normativos e Metadados</span>
+        <h3 class="font-cinzel text-xl font-bold text-[#0C1B2A] mt-1">Como Referenciar e Citar este Recurso Educacional</h3>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Referência ABNT NBR 6023 -->
+        <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 space-y-2">
+          <div class="flex justify-between items-center">
+            <span class="text-xs font-bold text-gray-700 uppercase">Referência Completa (ABNT NBR 6023:2018)</span>
+            <button onclick="copyToClipboard('ref-text', 'Referência copiada!')" class="text-xs text-[#1B6B65] hover:underline font-semibold flex items-center gap-1">
+              <i class="ph ph-copy"></i> Copiar
+            </button>
+          </div>
+          <p id="ref-text" class="text-xs font-mono text-gray-800 bg-white p-3 rounded border border-gray-200 leading-relaxed">
+            SILVA, Andréa Soares Rocha da. <strong>Sistemas de Organização do Conhecimento: organização, classificação e recuperação</strong>. Infográfico interativo educacional web autocontido em HTML/CSS/JS. Recurso pedagógico inspirado na aula da Profa. Dra. Laiana Ferreira de Sousa. Fortaleza: Programa de Pós-Graduação em Ciência da Informação, 2026.
+          </p>
+        </div>
+
+        <!-- Citação ABNT NBR 10520 -->
+        <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 space-y-2">
+          <div class="flex justify-between items-center">
+            <span class="text-xs font-bold text-gray-700 uppercase">Formato de Citação no Texto (ABNT NBR 10520:2023)</span>
+            <button onclick="copyToClipboard('cit-text', 'Citação copiada!')" class="text-xs text-[#1B6B65] hover:underline font-semibold flex items-center gap-1">
+              <i class="ph ph-copy"></i> Copiar
+            </button>
+          </div>
+          <div id="cit-text" class="text-xs font-mono text-gray-800 bg-white p-3 rounded border border-gray-200 space-y-2">
+            <p><strong>Citação Indireta:</strong> (Silva, 2026) ou Silva (2026)</p>
+            <p><strong>Citação Direta:</strong> (Silva, 2026, recurso digital interativo)</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- RODAPÉ INSTITUCIONAL -->
+  <footer class="bg-[#0C1B2A] text-gray-400 py-10 px-4 sm:px-6 lg:px-8 border-t border-gray-800 text-xs">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+      <div>
+        <p class="font-bold text-gray-200">Programa de Pós-Graduação em Ciência da Informação (PPGCI)</p>
+        <p class="text-gray-500">Disciplina: Conteúdos Digitais e suas Técnicas de Produção e de Preservação</p>
+        <p class="text-gray-400 mt-1">Autora e Docente: Andréa Soares Rocha da Silva • Fortaleza - CE, 2026</p>
+      </div>
+      <div class="text-right">
+        <a href="#inicio" class="text-[#C59B27] hover:text-[#F4D368] font-semibold flex items-center gap-1 justify-center md:justify-end">
+          <i class="ph ph-arrow-up"></i> Voltar ao Topo
+        </a>
+        <p class="text-[11px] text-gray-500 mt-1">Recurso autocontido em HTML/CSS/JavaScript nativo.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT LOGIC (INTERATIVIDADE, QUIZZ COM 10 ITENS, BUSCA FACETADA) -->
+  <script>
+    // 1. Controle da Barra de Progresso
+    window.addEventListener('scroll', () => {
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('progress-bar').style.width = scrolled + '%';
+    });
+
+    // 2. Toggle do Menu Retrátil
+    function toggleNavMenu() {
+      const panel = document.getElementById('collapsible-nav-panel');
+      panel.classList.toggle('hidden');
+    }
+
+    // 3. Simulador de Busca Facetada (Inspirado no ARES / UNA-SUS)
+    const aresDatabase = [
+      {
+        id: 1,
+        title: "Podcast: Hepatite Viral - Combatendo o Preconceito com Conhecimento",
+        type: "Audio",
+        typeLabel: "Áudio / Podcast",
+        decs: "Hepatite",
+        inst: "UFMA",
+        icon: "ph-headphones"
+      },
+      {
+        id: 2,
+        title: "Infográfico de Cuidados Clínicos na Estratégia Saúde da Família",
+        type: "Infografico",
+        typeLabel: "Infográfico",
+        decs: "Saude da Familia",
+        inst: "UFC",
+        icon: "ph-image"
+      },
+      {
+        id: 3,
+        title: "Protocolo de Manejo Clínico e Diagnóstico de Infecções por SARS-CoV-2",
+        type: "Texto",
+        typeLabel: "Texto / Guia Técnico",
+        decs: "COVID-19",
+        inst: "FIOCRUZ",
+        icon: "ph-file-text"
+      },
+      {
+        id: 4,
+        title: "Vídeo Educativo: Estratégias de Controle da Hipertensão Arterial Sistêmica",
+        type: "Video",
+        typeLabel: "Vídeo",
+        decs: "Hipertensao",
+        inst: "UFC",
+        icon: "ph-video-camera"
+      }
+    ];
+
+    function renderAresResources(items) {
+      const container = document.getElementById('ares-results-container');
+      const counter = document.getElementById('ares-counter');
+      counter.innerText = `Exibindo ${items.length} de ${aresDatabase.length} recursos`;
+
+      if (items.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-2 p-6 text-center text-gray-500 bg-gray-50 rounded-lg border border-dashed border-gray-300">
+            Nenhum recurso educacional corresponde à combinação de facetas selecionada.
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = items.map(item => `
+        <div class="p-4 bg-white rounded-lg border border-gray-200 hover:border-[#C59B27] transition shadow-sm space-y-2">
+          <div class="flex items-center justify-between text-xs text-gray-500">
+            <span class="badge bg-teal-50 text-[#1B6B65] border border-teal-200">
+              <i class="ph ${item.icon}"></i> ${item.typeLabel}
+            </span>
+            <span class="font-bold text-gray-700">${item.inst}</span>
+          </div>
+          <h4 class="font-bold text-xs sm:text-sm text-[#0C1B2A]">${item.title}</h4>
+          <div class="pt-2 border-t border-gray-100 flex items-center justify-between text-[11px] text-gray-500">
+            <span>DeCS: <strong class="text-amber-700">${item.decs}</strong></span>
+            <span class="text-green-700 font-semibold">Acesso Aberto</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filterAresResources() {
+      const type = document.getElementById('facet-type').value;
+      const decs = document.getElementById('facet-decs').value;
+      const inst = document.getElementById('facet-inst').value;
+
+      const filtered = aresDatabase.filter(item => {
+        const matchType = type === 'all' || item.type === type;
+        const matchDecs = decs === 'all' || item.decs === decs;
+        const matchInst = inst === 'all' || item.inst === inst;
+        return matchType && matchDecs && matchInst;
+      });
+
+      renderAresResources(filtered);
+    }
+
+    function resetFacets() {
+      document.getElementById('facet-type').value = 'all';
+      document.getElementById('facet-decs').value = 'all';
+      document.getElementById('facet-inst').value = 'all';
+      renderAresResources(aresDatabase);
+    }
+
+    // 4. QUIZZ DE 10 ITENS SOBRE A MATÉRIA
+    const quizQuestions = [
+      {
+        q: "1. Segundo González de Gómez (2001) e Santos et al. (2019), qual é a principal finalidade do estudo epistemológico na Organização e Representação do Conhecimento?",
+        options: [
+          { text: "Apenas registrar o histórico cronológico de bibliotecas antigas.", correct: false },
+          { text: "Investigar as condições, origens e possibilidades que legitimam o conhecimento científico na área.", correct: true },
+          { text: "Substituir os softwares de automação por catálogos manuais.", correct: false },
+          { text: "Eliminar o uso de vocabulários controlados nos sistemas de busca.", correct: false }
+        ],
+        explanation: "A epistemologia analisa as condições e fundamentos de validação e produção científica do conhecimento (González de Gómez, 2001)."
+      },
+      {
+        q: "2. Na distinção proposta por Bräscher e Café (2008, 2010), a que se aplica especificamente a Organização da Informação (OI)?",
+        options: [
+          { text: "Às unidades cognitivas puras do pensamento e ontologias abstratas.", correct: false },
+          { text: "Exclusivamente aos algoritmos de inteligência artificial generativa.", correct: false },
+          { text: "Às ocorrências individuais de objetos informacionais e sua descrição física e de conteúdo.", correct: true },
+          { text: "Aos modelos matemáticos de simulação probabilística.", correct: false }
+        ],
+        explanation: "A OI aplica-se a objetos e suportes concretos individuais, enquanto a OC trata dos conceitos (Bräscher & Café, 2010)."
+      },
+      {
+        q: "3. Na Recuperação da Informação, quando uma mesma palavra pode atuar como verbo, substantivo ou adjetivo gerando ruído, estamos diante de que tipo de ambiguidade?",
+        options: [
+          { text: "Ambiguidade Morfológica (policategorização gramatical).", correct: true },
+          { text: "Ambiguidade Sintática estrita de argumento.", correct: false },
+          { text: "Ambiguidade Pragmática puramente situacional.", correct: false },
+          { text: "Ambiguidade Tecnológica dos servidores de banco de dados.", correct: false }
+        ],
+        explanation: "A ambiguidade morfológica decorre da policategorização gramatical do mesmo vocábulo (ex.: proposta)."
+      },
+      {
+        q: "4. Qual é o papel central dos Sistemas de Organização do Conhecimento (SOC) de acordo com Gail Hodge (2000)?",
+        options: [
+          { text: "Substituir os servidores em nuvem por servidores locais.", correct: false },
+          { text: "Mecanismos estruturantes de organização e gestão do conhecimento em bibliotecas, museus e arquivos.", correct: true },
+          { text: "Programar linguagens procedurais como C e Java.", correct: false },
+          { text: "Criar interfaces gráficas sem necessidade de metadados.", correct: false }
+        ],
+        explanation: "Hodge (2000) considera os SOCs o coração de acervos digitais e tradicionais para gestão do conhecimento."
+      },
+      {
+        q: "5. Na tipologia de Gail Hodge (2000), a qual grupo pertencem os 'Tesauros' e as 'Ontologias'?",
+        options: [
+          { text: "Listas de Termos (estrutura fraca).", correct: false },
+          { text: "Classificações e Categorias (estrutura intermediária).", correct: false },
+          { text: "Listas de Relacionamentos (estrutura forte com relacionamentos conceituais complexos).", correct: true },
+          { text: "Dicionários geográficos e gazetteers.", correct: false }
+        ],
+        explanation: "Tesauros e ontologias possuem expressividade semântica forte e integram as Listas de Relacionamentos (Hodge, 2000)."
+      },
+      {
+        q: "6. Na teoria de Ranganathan (1967), quais são as cinco categorias fundamentais do arranjo em facetas (fórmula PMEST)?",
+        options: [
+          { text: "Palavra, Morfologia, Escrita, Sintaxe e Texto.", correct: false },
+          { text: "Personalidade, Matéria, Energia, Espaço e Tempo.", correct: true },
+          { text: "Plano, Método, Estrutura, Sistema e Teoria.", correct: false },
+          { text: "Público, Meio, Emissor, Suporte e Transmissão.", correct: false }
+        ],
+        explanation: "A fórmula canônica de Ranganathan organiza o conhecimento nas facetas Personalidade, Matéria, Energia, Espaço e Tempo (PMEST)."
+      },
+      {
+        q: "7. Em ambientes web contemporâneos (como repositórios digitais e e-commerces), o que caracteriza a busca com facetas pós-coordenadas?",
+        options: [
+          { text: "Classificação prévia e rígida gravada na lombada física do livro.", correct: false },
+          { text: "Filtros dinâmicos e combináveis que o próprio usuário seleciona no momento da consulta.", correct: true },
+          { text: "Impossibilidade de refinar os resultados após a digitação da query.", correct: false },
+          { text: "Uso obrigatório de operadores lógicos booleanos escritos em maiúsculas pelo usuário.", correct: false }
+        ],
+        explanation: "A pós-coordenação ocorre no momento da recuperação, permitindo cruzar facetas dinamicamente (Vickery, 2008)."
+      },
+      {
+        q: "8. Qual é a principal limitação conceitual do Modelo Booleano clássico de Recuperação da Informação?",
+        options: [
+          { text: "Não permitir a utilização de operadores AND, OR e NOT.", correct: false },
+          { text: "Relevância binária (0 ou 1), sem gerar pontuação graduada (ranking) dos documentos.", correct: true },
+          { text: "Ser computacionalmente pesado demais para qualquer computador.", correct: false },
+          { text: "Exigir a elaboração de redes neurais profundas.", correct: false }
+        ],
+        explanation: "No modelo booleano, ou o registro atende rigorosamente à fórmula lógica ou não atende, inexistindo ordenação por ranking de pertinência."
+      },
+      {
+        q: "9. De acordo com o Modelo Vetorial (Vector Space Model - VSM), como é calculada a relevância entre uma consulta (query) e os documentos?",
+        options: [
+          { text: "Pela medição do cosseno do ângulo formado pelos vetores ponderados em um espaço multidimensional.", correct: true },
+          { text: "Por sorteio genético aleatório de palavras-chave.", correct: false },
+          { text: "Por ordem estritamente alfabética do sobrenome dos autores.", correct: false },
+          { text: "Pela quantidade fixa de 5 palavras em cada resumo.", correct: false }
+        ],
+        explanation: "O Modelo Vetorial mapeia termos em eixos ortogonais e infere similaridade pelo cosseno angular entre os vetores de pesos."
+      },
+      {
+        q: "10. No artigo 'Is classification necessary after Google?' (2012), qual é o posicionamento central defendido por Birger Hjørland?",
+        options: [
+          { text: "Os motores de busca do Google tornaram todos os sistemas de classificação desnecessários.", correct: false },
+          { text: "A classificação e a análise de domínio continuam indispensáveis, pois algoritmos cegos por palavras não resolvem a polissemia nem a estrutura disciplinar da ciência.", correct: true },
+          { text: "Apenas catálogos impressos do século XIX são confiáveis para o estudo científico.", correct: false },
+          { text: "A recuperação da informação deve abolir qualquer tipo de metadado temático.", correct: false }
+        ],
+        explanation: "Hjørland (2012) comprova que o Google não substitui a classificação; a organização do conhecimento é essencial para a pesquisa acadêmica."
+      }
+    ];
+
+    let userAnswers = {};
+
+    function renderQuiz() {
+      const container = document.getElementById('quiz-container');
+      container.innerHTML = quizQuestions.map((q, idx) => `
+        <div class="bg-white p-5 sm:p-6 rounded-xl border border-gray-200 shadow-sm space-y-3" id="quiz-block-${idx}">
+          <h4 class="font-bold text-sm text-[#0C1B2A] leading-relaxed">${q.q}</h4>
+          <div class="space-y-2">
+            ${q.options.map((opt, optIdx) => `
+              <button 
+                onclick="answerQuestion(${idx}, ${optIdx})" 
+                id="q-btn-${idx}-${optIdx}"
+                class="w-full text-left p-3 rounded-lg border border-gray-200 text-xs sm:text-sm hover:bg-gray-50 transition flex items-start gap-2">
+                <span class="w-5 h-5 rounded-full bg-gray-100 flex items-center justify-center text-xs font-bold text-gray-600 flex-shrink-0">
+                  ${String.fromCharCode(65 + optIdx)}
+                </span>
+                <span>${opt.text}</span>
+              </button>
+            `).join('')}
+          </div>
+          <div id="quiz-feedback-${idx}" class="hidden p-3 rounded-lg text-xs leading-relaxed"></div>
+        </div>
+      `).join('');
+    }
+
+    function answerQuestion(qIdx, optIdx) {
+      if (userAnswers[qIdx] !== undefined) return;
+      userAnswers[qIdx] = optIdx;
+
+      const question = quizQuestions[qIdx];
+      const selected = question.options[optIdx];
+      const feedbackEl = document.getElementById(`quiz-feedback-${qIdx}`);
+
+      question.options.forEach((opt, idx) => {
+        const btn = document.getElementById(`q-btn-${qIdx}-${idx}`);
+        btn.disabled = true;
+        if (opt.correct) {
+          btn.classList.add('bg-green-50', 'border-green-400', 'text-green-900', 'font-semibold');
+        } else if (idx === optIdx && !opt.correct) {
+          btn.classList.add('bg-red-50', 'border-red-400', 'text-red-900');
+        }
+      });
+
+      feedbackEl.classList.remove('hidden');
+      if (selected.correct) {
+        feedbackEl.className = 'p-3 rounded-lg text-xs bg-green-50 border border-green-200 text-green-900 block';
+        feedbackEl.innerHTML = `<strong>Correto!</strong> ${question.explanation}`;
+      } else {
+        feedbackEl.className = 'p-3 rounded-lg text-xs bg-red-50 border border-red-200 text-red-900 block';
+        feedbackEl.innerHTML = `<strong>Incorreto.</strong> ${question.explanation}`;
+      }
+
+      checkQuizCompletion();
+    }
+
+    function checkQuizCompletion() {
+      if (Object.keys(userAnswers).length === quizQuestions.length) {
+        let correctCount = 0;
+        quizQuestions.forEach((q, idx) => {
+          if (q.options[userAnswers[idx]].correct) correctCount++;
+        });
+
+        const card = document.getElementById('quiz-score-card');
+        const text = document.getElementById('quiz-score-text');
+        card.classList.remove('hidden');
+        text.innerHTML = `Você acertou <strong>${correctCount} de 10</strong> questões (${(correctCount/10)*100}% de aproveitamento).`;
+        card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    function resetQuiz() {
+      userAnswers = {};
+      document.getElementById('quiz-score-card').classList.add('hidden');
+      renderQuiz();
+    }
+
+    // 5. Utilitário de Cópia para Área de Transferência
+    function copyToClipboard(elementId, successMsg) {
+      const text = document.getElementById(elementId).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert(successMsg);
+      });
+    }
+
+    // Inicialização da Página
+    window.addEventListener('DOMContentLoaded', () => {
+      renderAresResources(aresDatabase);
+      renderQuiz();
+    });
+  </script>
+</body>
+</html>
