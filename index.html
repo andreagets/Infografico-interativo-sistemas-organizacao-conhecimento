@@ -2085,7 +2085,7 @@ html{scroll-behavior:smooth;scroll-padding-top:78px}body{background:var(--soc-bg
        Referência do recurso (ABNT)
       </h3>
 <p class="text-sm leading-relaxed" id="ref-recurso">
-       SILVA, Andréa Soares Rocha da. Sistemas de Organização do Conhecimento: organização, classificação e recuperação da informação digital . Fortaleza, 2026. Infográfico interativo (HTML5). Recurso educacional digital. Disponível em: https://andreagets.github.io/Infografico-interativo-sistemas-organizacao-conhecimento/. Acesso em: [Data-de-Acesso]. Licença CC BY-NC-ND 4.0.
+       SILVA, Andréa Soares Rocha da; DANTAS, Laiana Ferreira de Sousa. Sistemas de Organização do Conhecimento: organização, classificação e recuperação da informação digital. Fortaleza, 2026. Infográfico interativo (HTML5). Recurso educacional digital. Disponível em: https://andreagets.github.io/Infografico-interativo-sistemas-organizacao-conhecimento/. Acesso em: [data de acesso]. Licença CC BY-NC-ND 4.0.
       </p>
 <button class="mt-4 text-xs rounded-lg px-3 py-2 bg-brand-accent text-brand-ink font-bold" onclick="copiarCreditos('ref-recurso',this)" type="button">
        Copiar referência
@@ -2096,7 +2096,7 @@ html{scroll-behavior:smooth;scroll-padding-top:78px}body{background:var(--soc-bg
        Citação no texto (autor-data)
       </h3>
 <p class="text-sm leading-relaxed" id="cit-recurso">
-       (Silva, 2026) ou Silva (2026).
+       (Silva; Dantas, 2026)
       </p>
 <button class="mt-4 text-xs rounded-lg px-3 py-2 bg-brand-accent text-brand-ink font-bold" onclick="copiarCreditos('cit-recurso',this)" type="button">
        Copiar citação
@@ -2108,11 +2108,19 @@ html{scroll-behavior:smooth;scroll-padding-top:78px}body{background:var(--soc-bg
       Direitos de uso • CC BY-NC-ND 4.0
      </h3>
 <p class="text-sm leading-relaxed">
-      © 2026 Andréa Soares Rocha da Silva. Este recurso é disponibilizado sob a licença
-      <a class="underline text-brand-accent" href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.pt-br" rel="noopener noreferrer" target="_blank">
-       Creative Commons Atribuição–NãoComercial–SemDerivações 4.0 Internacional
-      </a>
-      . É permitido copiar e compartilhar o recurso integral e inalterado para fins não comerciais, com atribuição de autoria, referência à licença e observância das condições da licença. A licença não autoriza distribuição de versões adaptadas nem uso comercial sem autorização específica. Materiais de terceiros e imagens incorporadas permanecem sujeitos aos direitos e condições de suas respectivas fontes.
+      © 2026 Andréa Soares Rocha da Silva e Laiana Ferreira de Sousa Dantas. Todos os direitos reservados, ressalvadas as permissões concedidas pela licença Creative Commons.
+     </p>
+<p class="text-sm leading-relaxed mt-3">
+      Este recurso educacional digital é disponibilizado sob a licença <a class="underline text-brand-accent" href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.pt-br?utm_source=chatgpt.com" rel="noopener noreferrer" target="_blank">Creative Commons Atribuição–NãoComercial–SemDerivações 4.0 Internacional (CC BY-NC-ND 4.0)</a>.
+     </p>
+<p class="text-sm leading-relaxed mt-3">
+      É permitido copiar e compartilhar o recurso integral e inalterado, para fins não comerciais, desde que sejam atribuídos os devidos créditos às autoras, indicada a referência da licença e observadas suas condições.
+     </p>
+<p class="text-sm leading-relaxed mt-3">
+      A licença não autoriza a distribuição de versões adaptadas nem o uso comercial sem autorização específica das titulares dos direitos autorais.
+     </p>
+<p class="text-sm leading-relaxed mt-3">
+      Materiais de terceiros, incluindo textos, imagens e demais elementos eventualmente incorporados ao recurso, permanecem sujeitos aos direitos autorais e às condições de uso estabelecidas por seus respectivos titulares.
      </p>
 </div>
 <p class="text-xs text-slate-300">
@@ -2270,12 +2278,12 @@ html{scroll-behavior:smooth;scroll-padding-top:78px}body{background:var(--soc-bg
 
     // 4. Utilitários de Cópia para Clipboard
     function copyReferenceText() {
-      const text = `SILVA, Andréa Soares Rocha da. Sistemas de Organização do Conhecimento: organização, classificação e recuperação da informação digital . Fortaleza, 2026. Infográfico interativo (HTML5). Recurso educacional digital. Disponível em: https://andreagets.github.io/Infografico-interativo-sistemas-organizacao-conhecimento/. Acesso em: [Data-de-Acesso]. Licença CC BY-NC-ND 4.0.`;
+      const text = `SILVA, Andréa Soares Rocha da; DANTAS, Laiana Ferreira de Sousa. Sistemas de Organização do Conhecimento: organização, classificação e recuperação da informação digital. Fortaleza, 2026. Infográfico interativo (HTML5). Recurso educacional digital. Disponível em: https://andreagets.github.io/Infografico-interativo-sistemas-organizacao-conhecimento/. Acesso em: [data de acesso]. Licença CC BY-NC-ND 4.0.`;
       executeCopy(text);
     }
 
     function copyCitationText() {
-      const text = `(Silva, 2026)`;
+      const text = `(Silva; Dantas, 2026)`;
       executeCopy(text);
     }
 
